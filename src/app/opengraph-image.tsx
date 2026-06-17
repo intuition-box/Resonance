@@ -62,6 +62,23 @@ export default function Image() {
       >
         Recaps of Spaces, talks & AMAs — context, speakers, themes & missions.
       </div>
+      {/* Call-to-action — boosts click-through on social previews */}
+      <div
+        style={{
+          display: "flex",
+          alignSelf: "flex-start",
+          alignItems: "center",
+          marginTop: 44,
+          padding: "16px 30px",
+          fontSize: 30,
+          fontWeight: 600,
+          color: BG,
+          backgroundColor: CARAMEL,
+          borderRadius: 9999,
+        }}
+      >
+        Explore the recaps →
+      </div>
     </div>,
     {
       ...size,
