@@ -12,6 +12,8 @@ const nextConfig = {
   // font files into the standalone output (otherwise the OG card crashes in prod).
   outputFileTracingIncludes: {
     "/api/og/[slug]": ["./src/app/fonts/*.ttf"],
+    "/opengraph-image": ["./src/app/fonts/*.ttf"],
+    "/twitter-image": ["./src/app/fonts/*.ttf"],
   },
 };
 
