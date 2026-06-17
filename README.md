@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="public/brand/logo-resonance.svg" />
-    <img src="public/brand/logo-resonance-caramel.svg" alt="Resonance logo" width="200" />
+    <source media="(prefers-color-scheme: dark)" srcset="public/brand/resonance/logo.svg" />
+    <img src="public/brand/resonance/logo-caramel.svg" alt="Resonance logo" width="200" />
   </picture>
 
   <p align="center">
