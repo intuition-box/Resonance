@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+/* Dark "caramel" palette — warm dark neutrals + amber/caramel accent */
+@theme {
+  --color-caramel-50: #fdf6ec;
+  --color-caramel-100: #f8e6c9;
+  --color-caramel-200: #f0cd97;
+  --color-caramel-300: #e6ad5f;
+  --color-caramel-400: #db9038;
+  --color-caramel-500: #c4762a;
+  --color-caramel-600: #a35d22;
+  --color-caramel-700: #7e451f;
+  --color-caramel-800: #5c331c;
+  --color-caramel-900: #3b2214;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #13100c;
+  background-image: radial-gradient(
+      900px 500px at 12% -10%,
+      rgba(196, 118, 42, 0.16),
+      transparent 60%
+    ), radial-gradient(800px 600px at 100% 0%, rgba(219, 144, 56, 0.1), transparent 55%);
+  background-attachment: fixed;
+  color: #ece4d8;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+::selection {
+  background: rgba(219, 144, 56, 0.3);
+}
+
+/* Thin warm scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #5c331c #13100c;
+}

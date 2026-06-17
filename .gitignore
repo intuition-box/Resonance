@@ -1,0 +1,37 @@
+# dependencies
+/node_modules
+.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# fumadocs (generated)
+/.source
+
+# production
+/dist
+/dist-ssr
+
+# misc
+.DS_Store
+*.pem
+*.local
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env
+.env*.local
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea
