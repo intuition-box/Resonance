@@ -18,7 +18,7 @@ From a source recording/transcript, create one new conference and wire it into t
 All types live in \`src/data/types.ts\`. Key shapes:
 - ConferenceMeta: title, subtitle?, platform, date, durationLabel, host?, oneLiner, idea?, note?, tags[], sourceNote?, announcementUrl?, ogImage?
 - Org: id, name, tag, color (one of: sky | violet | caramel | emerald | rose | amber), description, logo?, x?
-- Speaker: id, name, org (an Org id), role, handle?, x?, avatar?, bio, highlights[], aliases?, stage (boolean — was on stage)
+- Speaker: id, name, org (an Org id), role, handle?, x?, avatar?, bio, highlights[], stage (boolean — was on stage)
 - ThemeBlock: part, order, title, speakers (Speaker ids), summary, points[]
 - Mission: id, title, theme, complexity (beginner | intermediate | advanced), summary, details[], recommended?
 - GlossaryEntry: term, definition

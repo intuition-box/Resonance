@@ -45,15 +45,14 @@ Roster reconstructed from the introductions made on the audio (everyone introduc
 
 ## MetaMask / Consensys (Delegation Framework team)
 
-### Ryan McPeck: « McOso / Makoso », lead Smart Accounts @ MetaMask
+### Ryan McPeck: lead Smart Accounts @ MetaMask
 - Leads **Smart Accounts at MetaMask**.
 - **Co-creator of the Delegation Framework** with Kames (before joining MetaMask).
 - Productized the open-source **Delegatable** project → **audited Delegation Framework**, integrated into the wallet, then fully open-sourced.
 - Tells the « origin story » (2020 → ETHDenver 2023, Dan Finlay).
 - Announces on the MetaMask side: **EIP-7715** (advanced permissions in the extension), **EIP-7710**, **X402** work, agent wallet, CLI tools.
-> ASR variants of his nickname: McOso, Makoso, Mocoso, Micoso.
 
-### Jordan Andrews: « Jordy / Jordi », Ecosystem manager @ Consensys / MetaMask
+### Jordan Andrews: Ecosystem manager @ Consensys / MetaMask
 - **Ecosystem manager** at Consensys & MetaMask.
 - Partnerships, go-to-market and ecosystem for the **Delegation Framework** and the **Smart Accounts Kit**.
 - Moderated the ECC Brussels panel where he met Billy and discovered Intuition.
@@ -79,7 +78,7 @@ Roster reconstructed from the introductions made on the audio (everyone introduc
 | Kames | Intuition | Lead smart contracts / eng | - |
 | Zet | Intuition Box | Author of the missions | - |
 | Saulo | Intuition Box | Education / review | - |
-| Ryan McPeck | MetaMask | Lead Smart Accounts | @McOso (Makoso) |
-| Jordan Andrews | Consensys / MetaMask | Ecosystem manager | @Jordi |
+| Ryan McPeck | MetaMask | Lead Smart Accounts | @McOso |
+| Jordan Andrews | Consensys / MetaMask | Ecosystem manager | - |
 | Ayush | MetaMask | (X402 to come) | @Ayush |
 | JP/GP | Intuition (comm.) | Author of the Intuition skill | - |

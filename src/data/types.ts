@@ -29,7 +29,6 @@ export type Speaker = {
   avatar?: string;
   bio: string;
   highlights: string[];
-  aliases?: string[];
   stage: boolean;
 };
 

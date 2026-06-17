@@ -34,5 +34,5 @@ The host emphasizes that the topic is "absolutely fundamental to a lot of the ne
 ## Recurring call to action
 
 - Share the Space, put it on the timeline.
-- Follow the accounts: **Makoso** (Ryan), **Ayush**, **Jordi** (Jordan), **MetaMaskDev**, **Intuition_Box**, and the main **Intuition** account.
+- Follow the accounts: **McOso** (Ryan), **Ayush**, **Jordy** (Jordan), **MetaMaskDev**, **Intuition_Box**, and the main **Intuition** account.
 - Apply to the missions, join the Discord, attend the session the next day.

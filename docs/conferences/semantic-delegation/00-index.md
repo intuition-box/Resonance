@@ -28,5 +28,3 @@ Three organizations (**Intuition**, the on-chain reputation knowledge graph; its
 - `Semantic Delegation w_ Intuition & MetaMask.mp3` (part 1)
 - `Semantic Delegation (Part 2) w_ MetaMask & Intuition.mp3` (part 2)
 - Synthesis established from the audio transcription of the two parts of the Space.
-
-> ⚠️ The proper nouns include automatic speech recognition (ASR) transcription variants, normalized in these docs: **McOso/Makoso/Mocoso/Micoso → Ryan McPeck** ; **Kames/Games/Cainz/Keynes → Kames** ; **Zet/Zet/Zep → Zet** ; **Saulo/Salo/Saolo → Saulo** ; **Jordy/Jordi → Jordan Andrews**.

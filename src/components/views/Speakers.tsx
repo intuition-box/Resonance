@@ -46,12 +46,7 @@ export function Speakers() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {members.map((s) => (
-                  <SpeakerCard
-                    key={s.id}
-                    speaker={s}
-                    audience={dict.speakers.audience}
-                    asrLabel={dict.speakers.asrVariants}
-                  />
+                  <SpeakerCard key={s.id} speaker={s} audience={dict.speakers.audience} />
                 ))}
               </div>
             </section>
@@ -63,12 +58,7 @@ export function Speakers() {
           <div className="mb-4 text-sm font-medium text-white/50">{dict.speakers.others}</div>
           <div className="grid gap-4 sm:grid-cols-2">
             {orphanMembers.map((s) => (
-              <SpeakerCard
-                key={s.id}
-                speaker={s}
-                audience={dict.speakers.audience}
-                asrLabel={dict.speakers.asrVariants}
-              />
+              <SpeakerCard key={s.id} speaker={s} audience={dict.speakers.audience} />
             ))}
           </div>
         </section>
@@ -80,11 +70,9 @@ export function Speakers() {
 function SpeakerCard({
   speaker,
   audience,
-  asrLabel,
 }: {
   speaker: Speaker;
   audience: string;
-  asrLabel: string;
 }) {
   return (
     <Card variant="default" className="h-full">
@@ -145,11 +133,6 @@ function SpeakerCard({
               </li>
             ))}
           </ul>
-        )}
-        {speaker.aliases && speaker.aliases.length > 0 && (
-          <p className="text-xs text-white/30">
-            {asrLabel} {speaker.aliases.join(", ")}
-          </p>
         )}
       </Card.Content>
     </Card>

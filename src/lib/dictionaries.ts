@@ -86,7 +86,6 @@ export const dictionary = {
     description:
       "Who speaks, for which organization, in which role. Each profile links to their X account.",
     audience: "(audience)",
-    asrVariants: "ASR variants:",
     others: "Others",
   },
   themes: {

@@ -84,7 +84,6 @@ export const speakers: Speaker[] = [
     avatar: "/media/speakers/alice.jpg", // optional; file in public/media/speakers/
     bio: "One or two sentences about who Alice is.",
     highlights: ["A notable point she made", "Another takeaway"],
-    aliases: ["alice.eth"], // optional
     stage: true, // true = on air (counted in "on stage" + OG card)
   },
   {

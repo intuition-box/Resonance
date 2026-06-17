@@ -73,7 +73,7 @@ type Org = { id: string; name: string; tag: string;
   description: string; logo?: string; x?: string };
 type Speaker = { id: string; name: string; org: string /* an Org id */;
   role: string; handle?: string; x?: string; avatar?: string;
-  bio: string; highlights: string[]; aliases?: string[]; stage: boolean };
+  bio: string; highlights: string[]; stage: boolean };
 type ThemeBlock = { part: number; order: number; title: string;
   speakers: string[] /* Speaker ids */; summary: string; points: string[] };
 type Mission = { id: number; title: string; theme: string;

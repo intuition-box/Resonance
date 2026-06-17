@@ -31,7 +31,6 @@ export const speakers: Speaker[] = [
       "“The man at the intersection of both worlds”",
       "Pushes viral growth loops (onboarding, invite links)",
     ],
-    aliases: ["Games", "Cainz", "Keynes"],
     stage: true,
   },
   {
@@ -48,7 +47,6 @@ export const speakers: Speaker[] = [
       "Carries liquid democracy (missions 10 & 11) and the caveat enforcer registry (13)",
       "Co-hosts the follow-up Discord session",
     ],
-    aliases: ["Zett", "Zep"],
     stage: true,
   },
   {
@@ -64,7 +62,6 @@ export const speakers: Speaker[] = [
       "Co-hosts the follow-up Discord session (~2 h)",
       "Used as an example in the liquid democracy demo (contextualized delegation)",
     ],
-    aliases: ["Salo", "Saolo"],
     stage: true,
   },
   {
@@ -81,7 +78,6 @@ export const speakers: Speaker[] = [
       "Brought the framework into the wallet then 100% open-sourced it",
       "Roadmap: EIP-7715, EIP-7710, X402, agent wallet, CLI",
     ],
-    aliases: ["Makoso", "Mocoso", "Micoso"],
     stage: true,
   },
   {
@@ -97,7 +93,6 @@ export const speakers: Speaker[] = [
       "Moderated the ECC Brussels panel where he met Billy",
       "Frames the stakes: trust + permissions = a safer way to enable automation",
     ],
-    aliases: ["Jordi"],
     stage: true,
   },
   {
