@@ -64,6 +64,9 @@ export function conferenceToMarkdown(c: Conference): string {
   if (meta.idea) out.push("", `**Key idea.** ${meta.idea}`);
   if (meta.tags.length) out.push("", `Tags: ${meta.tags.join(", ")}`);
   out.push("", `Source: ${SITE_URL}/c/${c.slug}`);
+  if (meta.sessions?.length) {
+    out.push(`Spaces: ${meta.sessions.map((s) => `${s.label} — ${s.url}`).join(" · ")}`);
+  }
 
   if (c.bounties) {
     out.push("", "## Bounties", `${c.bounties.total} — ${c.bounties.range}`);

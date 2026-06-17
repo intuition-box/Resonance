@@ -17,6 +17,10 @@ export const meta: ConferenceMeta = {
   tags: ["Web3", "Delegation", "Governance", "AI agents"],
   sourceNote: "Transcribed from the 2 audio replays, then reconstructed and synthesized.",
   announcementUrl: "https://x.com/0xIntuition/status/2066584800182305065",
+  sessions: [
+    { label: "Part 1", url: "https://x.com/i/spaces/1RJZzzXydyNJB" },
+    { label: "Part 2", url: "https://x.com/i/spaces/1qGvvvqbVjeGB" },
+  ],
 };
 
 export const bounties: Bounties = {

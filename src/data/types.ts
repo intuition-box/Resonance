@@ -71,6 +71,9 @@ export type ConferenceMeta = {
   sourceNote?: string;
   /** Link to the event's official announcement (e.g. announcement tweet). */
   announcementUrl?: string;
+  /** Replayable audio Space sessions. An event can span several Spaces (e.g.
+   * a mid-talk cut forced a part 2); each entry is one listenable session. */
+  sessions?: { label: string; url: string }[];
   /** Optional override of the social OG image. Default: card generated on
    * the fly (/api/og/<slug>). Only set this to force a specific image. */
   ogImage?: string;

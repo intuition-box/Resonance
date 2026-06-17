@@ -23,6 +23,12 @@ export const meta: ConferenceMeta = {
   tags: ["Web3", "Reputation"],
   sourceNote: "Transcribed from the audio replay, then synthesized.", // optional
   announcementUrl: "https://x.com/0xIntuition/status/123", // optional
+  sessions: [
+    // optional — replayable audio Space links; add several if the event
+    // spanned multiple Spaces (e.g. a cut forced a part 2). Rendered as CTA
+    // buttons under the banner, alongside a "Copy transcription" button.
+    { label: "Part 1", url: "https://x.com/i/spaces/1RJZ..." },
+  ],
 };
 
 export const bounties: Bounties = {

@@ -1,12 +1,16 @@
 "use client";
 
+import { conferenceToMarkdown } from "@/lib/conference-markdown";
 import { dictionary as dict } from "@/lib/dictionaries";
 import { Card, Chip } from "@heroui/react";
 import {
   ArrowRight,
   CalendarDays,
+  Check,
   Clock,
+  Copy,
   ExternalLink,
+  Headphones,
   Radio,
   Sparkles,
   Target,
@@ -14,6 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useConference } from "../conference-provider";
 import { OrgTag } from "../shared";
 
@@ -75,15 +80,18 @@ export function ConferenceHome() {
 
   return (
     <div className="flex flex-col gap-12">
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
-        <Image
-          src={coverSrc}
-          alt=""
-          fill
-          priority
-          sizes="(min-width: 1024px) 1024px, 100vw"
-          className="object-cover"
-        />
+      <div className="flex flex-col gap-4">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
+          <Image
+            src={coverSrc}
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 1024px) 1024px, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <ConferenceActions />
       </div>
       <section>
         <Chip color="accent" variant="soft" size="sm">
@@ -172,6 +180,55 @@ export function ConferenceHome() {
           {[meta.note, meta.sourceNote].filter(Boolean).join(" ")}
         </p>
       )}
+    </div>
+  );
+}
+
+const CTA_CLASS =
+  "inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white";
+
+/** Action row under the banner: one link per audio Space session + a button
+ * that copies the full conference transcript (Markdown) to the clipboard. */
+function ConferenceActions() {
+  const conference = useConference();
+  const { meta } = conference;
+  const sessions = meta.sessions ?? [];
+  const [copied, setCopied] = useState(false);
+
+  const copyTranscript = async () => {
+    try {
+      await navigator.clipboard.writeText(conferenceToMarkdown(conference));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // clipboard unavailable (non-secure context): silently ignore
+    }
+  };
+
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {sessions.map((s) => (
+        <a
+          key={s.url}
+          href={s.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={CTA_CLASS}
+          aria-label={dict.home.listenSessionAria(s.label, meta.platform)}
+        >
+          <Headphones className="size-3.5 text-caramel-300" />
+          <span>{dict.home.listenSession(s.label)}</span>
+          <ExternalLink className="size-3 opacity-50" />
+        </a>
+      ))}
+      <button type="button" onClick={copyTranscript} className={CTA_CLASS}>
+        {copied ? (
+          <Check className="size-3.5 text-emerald-400" />
+        ) : (
+          <Copy className="size-3.5 text-caramel-300" />
+        )}
+        <span>{copied ? dict.home.transcriptCopied : dict.home.copyTranscript}</span>
+      </button>
     </div>
   );
 }

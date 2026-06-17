@@ -36,6 +36,13 @@ export function validateConferences(
       );
     }
 
+    for (const [i, s] of (c.meta?.sessions ?? []).entries()) {
+      if (!s.label?.trim()) errors.push(`${where}: meta.sessions[${i}] has an empty label`);
+      if (!/^https?:\/\//.test(s.url ?? "")) {
+        errors.push(`${where}: meta.sessions[${i}] url "${s.url}" must be an http(s) URL`);
+      }
+    }
+
     const orgIds = new Set<string>();
     for (const o of c.orgs) {
       if (orgIds.has(o.id)) errors.push(`${where}: duplicate org id "${o.id}"`);

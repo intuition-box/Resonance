@@ -20,6 +20,25 @@ test.describe("Conference page", () => {
       expect(res?.status(), `sub-page ${sub}`).toBe(200);
     }
   });
+
+  test("the banner CTAs expose the Space sessions and a copy-transcript button", async ({
+    page,
+  }) => {
+    await page.goto("/c/semantic-delegation");
+
+    // One link per audio Space session (this conference spanned two Spaces).
+    await expect(page.locator('a[href*="x.com/i/spaces/1RJZzzXydyNJB"]')).toBeVisible();
+    await expect(page.locator('a[href*="x.com/i/spaces/1qGvvvqbVjeGB"]')).toBeVisible();
+
+    // The "Copy transcription" button copies the Markdown to the clipboard.
+    await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
+    const copy = page.getByRole("button", { name: /copy transcription/i });
+    await expect(copy).toBeVisible();
+    await copy.click();
+    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboard).toContain("# Semantic Delegation");
+    expect(clipboard).toContain("x.com/i/spaces/1RJZzzXydyNJB");
+  });
 });
 
 test.describe("Generated OG image (/api/og/<slug>)", () => {
