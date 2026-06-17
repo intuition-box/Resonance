@@ -1,27 +1,23 @@
 "use client";
 
-import { loc } from "@/lib/loc";
+import { dictionary as dict } from "@/lib/dictionaries";
 import { Card } from "@heroui/react";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useConference } from "../conference-provider";
-import { useI18n } from "../i18n-provider";
 import { PageHeader } from "../shared";
 
 export function Glossary() {
   const { glossary = [] } = useConference();
-  const { lang, dict } = useI18n();
   const [q, setQ] = useState("");
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     if (!needle) return glossary;
     return glossary.filter(
-      (e) =>
-        e.term.toLowerCase().includes(needle) ||
-        loc(e.definition, lang).toLowerCase().includes(needle),
+      (e) => e.term.toLowerCase().includes(needle) || e.definition.toLowerCase().includes(needle),
     );
-  }, [q, glossary, lang]);
+  }, [q, glossary]);
 
   return (
     <div>
@@ -49,7 +45,7 @@ export function Glossary() {
               <Card.Title className="text-base text-caramel-200">{e.term}</Card.Title>
             </Card.Header>
             <Card.Content>
-              <p className="text-sm leading-relaxed text-white/70">{loc(e.definition, lang)}</p>
+              <p className="text-sm leading-relaxed text-white/70">{e.definition}</p>
             </Card.Content>
           </Card>
         ))}

@@ -17,6 +17,6 @@ export function ConferenceProvider({
 
 export function useConference(): Conference {
   const ctx = useContext(ConferenceContext);
-  if (!ctx) throw new Error("useConference doit être utilisé dans un ConferenceProvider");
+  if (!ctx) throw new Error("useConference must be used within a ConferenceProvider");
   return ctx;
 }

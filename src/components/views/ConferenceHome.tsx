@@ -1,22 +1,33 @@
 "use client";
 
-import { loc } from "@/lib/loc";
+import { dictionary as dict } from "@/lib/dictionaries";
 import { Card, Chip } from "@heroui/react";
-import { ArrowRight, CalendarDays, Clock, Radio, Sparkles, Target, Users } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Clock,
+  ExternalLink,
+  Radio,
+  Sparkles,
+  Target,
+  Users,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useConference } from "../conference-provider";
-import { useI18n } from "../i18n-provider";
 import { OrgTag } from "../shared";
 
 export function ConferenceHome() {
   const conference = useConference();
-  const { lang, dict } = useI18n();
   const { meta, orgs, speakers, missions, glossary, bounties } = conference;
-  const base = `/${lang}/c/${conference.slug}`;
+  const base = `/c/${conference.slug}`;
+  // Banner = static cover if provided, otherwise the OG card generated on the fly
+  // (/api/og/<slug>). The automatic generation thus also serves as the UI visual.
+  const coverSrc = conference.cover ?? `/api/og/${conference.slug}`;
 
   const stats = [
-    { icon: CalendarDays, label: dict.home.statDate, value: loc(meta.date, lang) },
-    { icon: Clock, label: dict.home.statDuration, value: loc(meta.durationLabel, lang) },
+    { icon: CalendarDays, label: dict.home.statDate, value: meta.date },
+    { icon: Clock, label: dict.home.statDuration, value: meta.durationLabel },
     {
       icon: Users,
       label: dict.home.statSpeakers,
@@ -27,7 +38,7 @@ export function ConferenceHome() {
           {
             icon: Target,
             label: dict.home.statBounties,
-            value: `${loc(bounties.total, lang)} · ${missions?.length ?? 0} ${dict.home.missionsCount}`,
+            value: `${bounties.total} · ${missions?.length ?? 0} ${dict.home.missionsCount}`,
           },
         ]
       : []),
@@ -35,7 +46,7 @@ export function ConferenceHome() {
 
   const navCards = [
     {
-      href: `${base}/intervenants`,
+      href: `${base}/speakers`,
       title: dict.home.cardSpeakers,
       desc: dict.home.cardSpeakersDesc,
       show: speakers.length > 0,
@@ -50,12 +61,12 @@ export function ConferenceHome() {
       href: `${base}/missions`,
       title: dict.home.cardMissions,
       desc: bounties
-        ? dict.home.cardMissionsBountyDesc(loc(bounties.range, lang), loc(bounties.total, lang))
+        ? dict.home.cardMissionsBountyDesc(bounties.range, bounties.total)
         : dict.home.cardMissionsDesc,
       show: (missions?.length ?? 0) > 0,
     },
     {
-      href: `${base}/glossaire`,
+      href: `${base}/glossary`,
       title: dict.home.cardGlossary,
       desc: dict.home.cardGlossaryDesc,
       show: (glossary?.length ?? 0) > 0,
@@ -64,20 +75,27 @@ export function ConferenceHome() {
 
   return (
     <div className="flex flex-col gap-12">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <Image
+          src={coverSrc}
+          alt=""
+          fill
+          priority
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          className="object-cover"
+        />
+      </div>
       <section>
         <Chip color="accent" variant="soft" size="sm">
           <Radio className="size-3" />
-          <Chip.Label>{loc(meta.platform, lang)}</Chip.Label>
+          <Chip.Label>{meta.platform}</Chip.Label>
         </Chip>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          {meta.title}
-        </h1>
+        {/* The banner (cover or OG card) already carries the title → visual h1 hidden, kept for a11y. */}
+        <h1 className="sr-only">{meta.title}</h1>
         {meta.subtitle && (
-          <p className="mt-2 text-xl font-medium text-caramel-200">{meta.subtitle}</p>
+          <p className="mt-3 text-xl font-medium text-caramel-200">{meta.subtitle}</p>
         )}
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/70">
-          {loc(meta.oneLiner, lang)}
-        </p>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/70">{meta.oneLiner}</p>
 
         {orgs.length > 0 && (
           <div className="mt-6 flex flex-wrap gap-3">
@@ -85,6 +103,18 @@ export function ConferenceHome() {
               <OrgTag key={o.id} name={o.name} color={o.color} logo={o.logo} />
             ))}
           </div>
+        )}
+
+        {meta.announcementUrl && (
+          <a
+            href={meta.announcementUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-caramel-200 transition-colors hover:text-caramel-100"
+          >
+            {dict.home.announcement}
+            <ExternalLink className="size-3.5 opacity-60" />
+          </a>
         )}
       </section>
 
@@ -110,7 +140,7 @@ export function ConferenceHome() {
               </div>
             </Card.Header>
             <Card.Content>
-              <p className="text-lg leading-relaxed text-white/85">{loc(meta.idea, lang)}</p>
+              <p className="text-lg leading-relaxed text-white/85">{meta.idea}</p>
             </Card.Content>
           </Card>
         </section>
@@ -139,9 +169,7 @@ export function ConferenceHome() {
 
       {(meta.note || meta.sourceNote) && (
         <p className="rounded-xl border border-white/5 bg-white/[0.02] p-4 text-sm text-white/50">
-          {[meta.note && loc(meta.note, lang), meta.sourceNote && loc(meta.sourceNote, lang)]
-            .filter(Boolean)
-            .join(" ")}
+          {[meta.note, meta.sourceNote].filter(Boolean).join(" ")}
         </p>
       )}
     </div>

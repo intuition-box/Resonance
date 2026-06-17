@@ -1,16 +1,16 @@
-# 03 — Thèmes & chronologie
+# 03 · Thèmes & chronologie
 
 Déroulé thématique des deux parties. Les blocs suivent l'ordre réel de la conversation.
 
-## Partie 1 — Fondations & origine
+## Partie 1 : Fondations & origine
 
 ### 1. Ouverture & présentations
-- Matt ouvre, fait monter les intervenants sur scène (quelques soucis techniques front-end pour les inviter).
+- Horus ouvre, fait monter les intervenants sur scène (quelques soucis techniques front-end pour les inviter).
 - Présentation du trio d'organisations : MetaMask, Intuition (core), Intuition Box.
-- Tour de table express : Zett, Billy, Kames, Ryan, Jordan se présentent.
+- Tour de table express : Zet, Billy, Kames, Ryan, Jordan se présentent.
 
 ### 2. Pourquoi la délégation a besoin de sémantique
-- Question-pivot posée par Matt : *pourquoi l'autorité déléguée a-t-elle besoin d'une compréhension sémantique / de paramètres supplémentaires issus des données structurées du knowledge graph ?*
+- Question-pivot posée par Horus : *pourquoi l'autorité déléguée a-t-elle besoin d'une compréhension sémantique / de paramètres supplémentaires issus des données structurées du knowledge graph ?*
 - Jordan pose le cadre : délégations = laisser dApps/agents agir au nom de l'utilisateur ; le knowledge graph décide **qui et quoi** est digne de confiance.
 
 ### 3. L'origin story du Delegation Framework (Ryan)
@@ -33,7 +33,7 @@ Déroulé thématique des deux parties. Les blocs suivent l'ordre réel de la co
 - « Je sens une opportunité de partenariat » → idée à formaliser.
 
 ### 6. Mission 13 introduite : registre communautaire de caveat enforcers
-- Idée née d'une discussion Zett × MetaMask à l'ECC.
+- Idée née d'une discussion Zet × MetaMask à l'ECC.
 - MetaMask maintient aujourd'hui une liste « bare bones » de caveat enforcers ; mais **qui maintient la liste des enforcers recommandés / auditables / fiables selon le contexte ?**
 - Réponse : **Intuition** et sa capacité à laisser la communauté **s'auto-organiser** (curation, listes communautaires, **ontologie**).
 
@@ -41,12 +41,12 @@ Déroulé thématique des deux parties. Les blocs suivent l'ordre réel de la co
 
 ---
 
-## Partie 2 — Gouvernance, agents & missions
+## Partie 2 : Gouvernance, agents & missions
 
 ### 7. Reprise
-- Matt reprend après le crash : « le show continue ».
+- Horus reprend après le crash : « le show continue ».
 
-### 8. Liquid democracy (Zett) — missions 10 & 11
+### 8. Liquid democracy (Zet) : missions 10 & 11
 - Constat : beaucoup de DAO restent en **plutocratie** (vote pondéré par les tokens).
 - **Liquid democracy** = mêler démocratie directe (voter soi-même) et délégative (élire un votant), avec des **chaînes de délégation** (je délègue, mon délégué re-délègue…).
 - Atout du Delegation Framework : les contrats de gouvernance restent **simples**, toute la complexité de sub-délégation vit dans le framework.
@@ -62,7 +62,7 @@ Déroulé thématique des deux parties. Les blocs suivent l'ordre réel de la co
 - « Autoriser n'importe quel membre de l'équipe MetaMask à voter en mon nom » → où vivent ces adresses ? Agrégateur centralisé **ou** état décentralisé d'attestations + trust anchors.
 - L'expression de la permission s'appuie alors sur l'**état on-chain** : ensembles d'acteurs × ensembles d'actions.
 
-### 11. Cas d'usage grand public (Matt) : billetterie & agents
+### 11. Cas d'usage grand public (Horus) : billetterie & agents
 - Concert / enchères / billets de sport très demandés, sniping et revente.
 - Avec agents + **X402** : déléguer 100 $ à 3 agents concurrents pour décrocher une place ; on ne paie jamais plus que ce qu'on délègue ; pas de serveur ni de service de sniping à monter.
 - Ryan : objectif = **renverser la logique du wallet**. Aujourd'hui la dApp construit la transaction et le wallet la parse/espère. Demain : l'app/agent **demande**, l'utilisateur **exprime** précisément, et accorde une capability strictement bornée.
@@ -75,10 +75,10 @@ Déroulé thématique des deux parties. Les blocs suivent l'ordre réel de la co
 - Missions **9 à 13** ouvertes, gradient de difficulté.
 - Entrées faciles : **9** (tutoriel délégation) et **12** (étendre l'Intuition skill).
 - **13** (registre de caveat enforcers), **10/11** (liquid democracy POC → prod, séquencées).
-- Conseil de Zett : **ré-écouter le Space** ; les candidats retenus seront « ceux qui comprennent la vision ».
+- Conseil de Zet : **ré-écouter le Space** ; les candidats retenus seront « ceux qui comprennent la vision ».
 
 ### 14. Clôture
-- Annonce session Discord du lendemain (Zett & Saulo, ~2 h).
+- Annonce session Discord du lendemain (Zet & Saulo, ~2 h).
 - Roadmap MetaMask : **7715**, **7710**, **X402**, agent wallet, CLI.
 - Billy : « début d'un boom de choses construites à l'intersection Intuition × Delegation Framework ». Teasing X402 pour la suite.
 - Rappels : postuler aux 5 missions, suivre les comptes, rejoindre le Discord.

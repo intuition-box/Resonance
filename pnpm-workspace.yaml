@@ -1,6 +1,10 @@
+# pnpm 10+/11 reads settings from here (no longer from the package.json "pnpm" field).
+# Dependencies allowed to run install/build scripts. sharp powers next/image
+# optimization and is required for the production build; the others ship native
+# binaries built on install.
 allowBuilds:
-  '@biomejs/biome': true
-  '@tailwindcss/oxide': true
+  "@biomejs/biome": true
+  "@tailwindcss/oxide": true
   esbuild: true
   sharp: true
   unrs-resolver: true

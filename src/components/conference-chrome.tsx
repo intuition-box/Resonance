@@ -1,21 +1,21 @@
 "use client";
 
+import { dictionary as dict } from "@/lib/dictionaries";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useConference } from "./conference-provider";
-import { useI18n } from "./i18n-provider";
+import { ShareToAI } from "./share-to-ai";
 
 export function ConferenceChrome() {
   const conference = useConference();
-  const { lang, dict } = useI18n();
   const pathname = usePathname() || "";
-  const base = `/${lang}/c/${conference.slug}`;
+  const base = `/c/${conference.slug}`;
 
   const tabs = [
     { href: base, label: dict.conf.overview, exact: true, show: true },
     {
-      href: `${base}/intervenants`,
+      href: `${base}/speakers`,
       label: dict.conf.speakers,
       show: conference.speakers.length > 0,
     },
@@ -26,7 +26,7 @@ export function ConferenceChrome() {
       show: (conference.missions?.length ?? 0) > 0,
     },
     {
-      href: `${base}/glossaire`,
+      href: `${base}/glossary`,
       label: dict.conf.glossary,
       show: (conference.glossary?.length ?? 0) > 0,
     },
@@ -35,7 +35,7 @@ export function ConferenceChrome() {
   return (
     <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/5 pb-3">
       <Link
-        href={`/${lang}`}
+        href="/"
         className="flex items-center gap-1.5 text-sm text-white/50 transition-colors hover:text-caramel-200"
       >
         <ArrowLeft className="size-4" />
@@ -62,6 +62,7 @@ export function ConferenceChrome() {
           );
         })}
       </ul>
+      <ShareToAI />
     </div>
   );
 }

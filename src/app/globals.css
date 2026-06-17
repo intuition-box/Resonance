@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
-/* Dark "caramel" palette — warm dark neutrals + amber/caramel accent */
+/* Dark "caramel" palette: warm dark neutrals + amber/caramel accent */
 @theme {
   --color-caramel-50: #fdf6ec;
   --color-caramel-100: #f8e6c9;
@@ -13,6 +13,14 @@
   --color-caramel-700: #7e451f;
   --color-caramel-800: #5c331c;
   --color-caramel-900: #3b2214;
+
+  /* "Resonance" brand color (single source of truth). Aligned with caramel-300. */
+  --color-brand: #e6ad5f;
+
+  /* Stack Sans (next/font/local). Notch = marque + gros titres, Headline = corps/UI. */
+  --font-sans: var(--ff-stack-headline), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-headline: var(--ff-stack-notch), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -35,15 +43,26 @@ body {
     ), radial-gradient(800px 600px at 100% 0%, rgba(219, 144, 56, 0.1), transparent 55%);
   background-attachment: fixed;
   color: #ece4d8;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-headline);
 }
 
 ::selection {
   background: rgba(219, 144, 56, 0.3);
 }
 
-/* Thin warm scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #5c331c #13100c;
+/* No visible scrollbar by design — the page still scrolls (wheel, touch, keyboard) */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chromium / WebKit */
 }

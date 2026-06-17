@@ -1,0 +1,19 @@
+{
+  "name": "Resonance · Intuition conference hub",
+  "short_name": "Resonance",
+  "description": "Recaps of the Intuition ecosystem's Spaces, talks and AMAs. One space per event.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#13100c",
+  "background_color": "#13100c",
+  "icons": [
+    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

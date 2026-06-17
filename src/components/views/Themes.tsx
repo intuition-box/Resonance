@@ -1,16 +1,13 @@
 "use client";
 
 import type { ThemeBlock } from "@/data/types";
-import type { Locale } from "@/lib/i18n";
-import { loc } from "@/lib/loc";
+import { dictionary as dict } from "@/lib/dictionaries";
 import { Card } from "@heroui/react";
 import { useConference } from "../conference-provider";
-import { useI18n } from "../i18n-provider";
 import { PageHeader } from "../shared";
 
 export function Themes() {
   const { themes, speakers, partLabels } = useConference();
-  const { lang, dict } = useI18n();
   const nameOf = (id: string) => speakers.find((s) => s.id === id)?.name ?? id;
 
   const parts = [...new Set(themes.map((t) => t.part))].sort((a, b) => a - b);
@@ -35,19 +32,15 @@ export function Themes() {
                 <h2 className="mb-1 text-lg font-semibold text-white">
                   {dict.themes.part} {part}
                   {label && (
-                    <span className="ml-2 text-sm font-normal text-white/40">
-                      {loc(label.label, lang)}
-                    </span>
+                    <span className="ml-2 text-sm font-normal text-white/40">{label.label}</span>
                   )}
                 </h2>
-                {label?.note && (
-                  <p className="mb-4 text-sm text-white/40">{loc(label.note, lang)}</p>
-                )}
+                {label?.note && <p className="mb-4 text-sm text-white/40">{label.note}</p>}
               </>
             )}
             <ol className="relative ml-3 mt-4 border-l border-white/10">
               {blocks.map((b) => (
-                <ThemeItem key={`${b.part}-${b.order}`} block={b} lang={lang} nameOf={nameOf} />
+                <ThemeItem key={`${b.part}-${b.order}`} block={b} nameOf={nameOf} />
               ))}
             </ol>
           </section>
@@ -59,11 +52,9 @@ export function Themes() {
 
 function ThemeItem({
   block,
-  lang,
   nameOf,
 }: {
   block: ThemeBlock;
-  lang: Locale;
   nameOf: (id: string) => string;
 }) {
   return (
@@ -73,17 +64,17 @@ function ThemeItem({
         <Card.Header>
           <Card.Title className="text-base">
             <span className="mr-2 text-caramel-400/70">{block.order}.</span>
-            {loc(block.title, lang)}
+            {block.title}
           </Card.Title>
-          <Card.Description>{loc(block.summary, lang)}</Card.Description>
+          <Card.Description>{block.summary}</Card.Description>
         </Card.Header>
         <Card.Content className="flex flex-col gap-3">
           {block.points.length > 0 && (
             <ul className="flex flex-col gap-1.5">
               {block.points.map((p) => (
-                <li key={p.en} className="flex gap-2 text-sm text-white/65">
+                <li key={p} className="flex gap-2 text-sm text-white/65">
                   <span className="mt-1.5 size-1 shrink-0 rounded-full bg-caramel-400/70" />
-                  {loc(p, lang)}
+                  {p}
                 </li>
               ))}
             </ul>

@@ -1,20 +1,18 @@
-import type { Locale } from "./i18n";
+// Site UI strings, English only. Non-English-speaking visitors
+// rely on the browser's automatic translation (document served as lang="en").
 
-// RÈGLE DU PROJET : toute chaîne d'UI vit ici, en `en` ET `fr`, l'anglais d'abord.
-// `en` est la référence (le type Dictionary en est dérivé), `fr` doit la couvrir.
-
-const en = {
+export const dictionary = {
   nav: {
     brandSuffix: "Resonance",
     add: "Contribute",
     addShort: "Contribute",
-    switchTo: "Français",
   },
   hub: {
     eyebrow: "Conference hub",
+    heroTitle: "The Intuition ecosystem, distilled.",
     brandSuffix: "Resonance",
     tagline:
-      "The recap portal for Spaces, talks and AMAs across the Intuition ecosystem: context, speakers, themes and missions — one space per event.",
+      "The recap portal for Spaces, talks and AMAs across the Intuition ecosystem: context, speakers, themes and missions, one space per event.",
     searchPlaceholder: "Search a conference, a theme…",
     add: "Contribute",
     emptySearch: "No conference matches your search.",
@@ -22,6 +20,28 @@ const en = {
     addFirst: "Add the first one",
     onStage: "on stage",
     footer: "Resonance · Conference hub of the Intuition ecosystem",
+    prevPage: "Previous",
+    nextPage: "Next",
+    goToPage: (n: number) => `Go to page ${n}`,
+    sortLabel: "Sort",
+    sortRecent: "Recent",
+    sortAZ: "A–Z",
+    clearTags: "Clear filters",
+  },
+  footer: {
+    tagline: "Recaps of the Intuition ecosystem's Spaces, talks and AMAs: one space per event.",
+    navTitle: "Navigate",
+    conferences: "Conferences",
+    contribute: "Contribute",
+    ecosystemTitle: "Ecosystem",
+    intuitionBox: "Intuition Box",
+    followX: "Intuition Box on X",
+    github: "GitHub organization",
+    projectTitle: "Project",
+    source: "Source code",
+    license: "License (MIT)",
+    builtFor: "Built for the Intuition ecosystem",
+    rights: "Open source · content contributed via pull request.",
   },
   conf: {
     back: "Hub",
@@ -31,6 +51,15 @@ const en = {
     missions: "Missions",
     glossary: "Glossary",
   },
+  ai: {
+    button: "Ask AI",
+    hint: "Send this conference to your assistant",
+    copyMarkdown: "Copy as Markdown",
+    copied: "Copied!",
+    chatgpt: "Open in ChatGPT",
+    claude: "Open in Claude",
+    perplexity: "Open in Perplexity",
+  },
   home: {
     statDate: "Date",
     statDuration: "Duration",
@@ -39,6 +68,7 @@ const en = {
     onStage: "on stage",
     missionsCount: "missions",
     keyIdea: "The key idea",
+    announcement: "Official announcement",
     cardSpeakers: "Speakers",
     cardSpeakersDesc: "Full roster: who speaks, for which organization, in which role.",
     cardThemes: "Themes & timeline",
@@ -54,7 +84,7 @@ const en = {
     eyebrow: "Roster",
     title: "Speakers",
     description:
-      "Who speaks, for which organization, in which role. Handles are inferred from mentions during the event.",
+      "Who speaks, for which organization, in which role. Each profile links to their X account.",
     audience: "(audience)",
     asrVariants: "ASR variants:",
     others: "Others",
@@ -90,16 +120,80 @@ const en = {
     eyebrow: "Open source",
     title: "Contribute a conference",
     intro:
-      "Conferences are hardcoded and contributed via GitHub pull request — no account, no database. Maintainer review keeps the quality high.",
+      "Conferences are hardcoded and contributed via GitHub pull request: no account, no database. Maintainer review keeps the quality high.",
+    stepsTitle: "How it works",
     step1: "Transcribe the audio/video and synthesize the content.",
     step2Pre: "Create ",
-    step2Mid: " exporting a bilingual ",
+    step2Mid: " (one file per part) exporting a ",
     step2End: " object.",
     step3Pre: "Register it in ",
     step3End: ".",
-    step4: "Open a pull request — a maintainer reviews and merges.",
-    rulePre: "Rule: every text field is ",
-    rulePost: ", English first.",
+    step4: "Open a pull request, a maintainer reviews and merges.",
+    modelTitle: "Anatomy of a conference",
+    modelIntro:
+      "A conference is a folder under src/data/conferences/<slug>/, one file per responsibility. A single <slug>.ts file also works for a short one.",
+    modules: [
+      {
+        file: "meta.ts",
+        label: "Identity & framing",
+        desc: "Title, platform, date, the one-liner, the key idea and tags.",
+      },
+      {
+        file: "orgs.ts",
+        label: "Organizations",
+        desc: "The teams involved, with their color and links.",
+      },
+      {
+        file: "speakers.ts",
+        label: "Speakers",
+        desc: "Who speaks, for which org, with their verified X identity and avatar.",
+      },
+      {
+        file: "themes.ts",
+        label: "Timeline",
+        desc: "The event block by block, in the real order of the conversation.",
+      },
+      {
+        file: "missions.ts",
+        label: "Missions",
+        desc: "Open missions and bounties launched after the event. Optional.",
+      },
+      {
+        file: "glossary.ts",
+        label: "Glossary",
+        desc: "The key technical concepts covered. Optional.",
+      },
+    ],
+    fieldsTitle: "Required vs optional",
+    requiredLabel: "Required",
+    optionalLabel: "Optional",
+    required: ["A slug and a title", "Platform, date and duration", "Speakers and timeline"],
+    optional: [
+      "Bounties & missions",
+      "A cover image",
+      "Speaker avatars & X links",
+      "Technical glossary",
+      "Official announcement link",
+    ],
+    fieldsNote:
+      "The page and the social card adapt to what you provide: no bounty, no cover or no avatar is perfectly fine.",
+    ogTitle: "No image to design",
+    ogDesc:
+      "A branded Open Graph card is generated automatically from your data (title, speakers, bounty). Set a cover only to override it.",
+    promptTitle: "Let an AI agent do the heavy lifting",
+    promptDesc:
+      "Copy a ready-made prompt bundling all the context an agent needs to add a conference the right way, then paste it into your coding agent.",
+    promptButton: "Copy agent prompt",
+    promptCopied: "Copied!",
+    sourcingTitle: "Assets & content sourcing",
+    transcriptionNote:
+      "Transcription and synthesis happen upstream, outside this repo — use any tool you like, then write the result into the data files (English).",
+    avatarsNote:
+      "Speaker avatars are optional and degrade gracefully. Declare the avatar path then run pnpm fetch-avatars to download it from the speaker's X handle (via unavatar) into public/media/speakers/ — don't hotlink X or Discord, those URLs rotate. Use public profile pictures of speakers who appeared publicly; any can be removed on request.",
+    validateNote:
+      "Before opening your PR, run pnpm validate to check data integrity (date format, cross-references, missing assets).",
+    rulePre: "Rule: every text field is a plain English ",
+    rulePost: " (no translation object); browsers handle translation for other languages.",
     exampleNote: "Use the existing Semantic Delegation conference as a reference.",
     colorsNote:
       "Org colors: sky, violet, caramel, emerald, rose, amber. Mission complexity: beginner, intermediate, advanced.",
@@ -115,122 +209,4 @@ const en = {
   },
 };
 
-const fr: Dictionary = {
-  nav: {
-    brandSuffix: "Resonance",
-    add: "Contribuer",
-    addShort: "Contribuer",
-    switchTo: "English",
-  },
-  hub: {
-    eyebrow: "Hub des conférences",
-    brandSuffix: "Resonance",
-    tagline:
-      "Le portail de synthèse des Spaces, talks et AMA de l'écosystème Intuition : contexte, intervenants, thèmes et missions — un espace par événement.",
-    searchPlaceholder: "Rechercher une conférence, un thème…",
-    add: "Contribuer",
-    emptySearch: "Aucune conférence ne correspond à la recherche.",
-    emptyNone: "Aucune conférence pour l'instant.",
-    addFirst: "Ajouter la première",
-    onStage: "sur scène",
-    footer: "Resonance · Hub des conférences de l'écosystème Intuition",
-  },
-  conf: {
-    back: "Hub",
-    overview: "Aperçu",
-    speakers: "Intervenants",
-    themes: "Thèmes",
-    missions: "Missions",
-    glossary: "Glossaire",
-  },
-  home: {
-    statDate: "Date",
-    statDuration: "Durée",
-    statSpeakers: "Intervenants",
-    statBounties: "Bounties",
-    onStage: "sur scène",
-    missionsCount: "missions",
-    keyIdea: "L'idée-force",
-    cardSpeakers: "Intervenants",
-    cardSpeakersDesc: "Roster complet : qui parle, pour quelle organisation, avec quel rôle.",
-    cardThemes: "Thèmes & chronologie",
-    cardThemesDesc: "L'événement, bloc par bloc.",
-    cardMissions: "Missions",
-    cardMissionsDesc: "Les missions ouvertes.",
-    cardMissionsBountyDesc: (range: string, total: string) =>
-      `${range} · ${total} de bounties à se partager.`,
-    cardGlossary: "Glossaire technique",
-    cardGlossaryDesc: "Les concepts clés de la conférence.",
-  },
-  speakers: {
-    eyebrow: "Roster",
-    title: "Intervenants",
-    description:
-      "Qui parle, pour quelle organisation, avec quel rôle. Les handles sont déduits des mentions de l'événement.",
-    audience: "(audience)",
-    asrVariants: "Variantes ASR :",
-    others: "Autres",
-  },
-  themes: {
-    eyebrow: "Déroulé",
-    title: "Thèmes & chronologie",
-    description: "L'événement bloc par bloc, dans l'ordre réel de la conversation.",
-    part: "Partie",
-  },
-  missions: {
-    eyebrowBounties: (total: string) => `${total} de bounties`,
-    eyebrowPlain: "Missions",
-    title: "Les missions",
-    descBounty: (range: string) =>
-      `${range}. Un individu ou une équipe sélectionné par mission ; candidatures multiples acceptées.`,
-    descPlain: "Les missions ouvertes à la suite de l'événement.",
-    howToApply: "Comment postuler",
-    applyAt: "Candidatures sur",
-    recommended: "Entrée conseillée",
-    complexityBeginner: "Entrée",
-    complexityIntermediate: "Moyenne",
-    complexityAdvanced: "Avancée",
-  },
-  glossary: {
-    eyebrow: "Référence",
-    title: "Glossaire technique",
-    description: "Les concepts clés abordés pendant la conférence.",
-    searchPlaceholder: "Rechercher un terme…",
-    empty: "Aucun terme ne correspond.",
-  },
-  contribute: {
-    eyebrow: "Open source",
-    title: "Contribuer une conférence",
-    intro:
-      "Les conférences sont codées en dur et contribuées via pull request GitHub — pas de compte, pas de base de données. La review d'un mainteneur garantit la qualité.",
-    step1: "Transcris l'audio/vidéo et synthétise le contenu.",
-    step2Pre: "Crée ",
-    step2Mid: " exportant un objet bilingue ",
-    step2End: ".",
-    step3Pre: "Référence-la dans ",
-    step3End: ".",
-    step4: "Ouvre une pull request — un mainteneur review et merge.",
-    rulePre: "Règle : chaque champ texte est ",
-    rulePost: ", l'anglais d'abord.",
-    exampleNote: "Prends la conférence Semantic Delegation existante comme référence.",
-    colorsNote:
-      "Couleurs d'organisation : sky, violet, caramel, emerald, rose, amber. Complexité de mission : beginner, intermediate, advanced.",
-    repoButton: "Ouvrir le dépôt",
-    repoSoon: "Lien du dépôt bientôt disponible.",
-  },
-  notFound: {
-    title: "Page introuvable",
-    message: "Cette page n'existe pas.",
-    confTitle: "Conférence introuvable",
-    confMessage: (slug: string) => `Aucune conférence ne correspond à « ${slug} ».`,
-    back: "← Retour au hub",
-  },
-};
-
-export type Dictionary = typeof en;
-
-const dictionaries: Record<Locale, Dictionary> = { en, fr };
-
-export function getDictionary(lang: Locale): Dictionary {
-  return dictionaries[lang];
-}
+export type Dictionary = typeof dictionary;

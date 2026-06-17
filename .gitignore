@@ -10,9 +10,6 @@
 *.tsbuildinfo
 next-env.d.ts
 
-# fumadocs (generated)
-/.source
-
 # production
 /dist
 /dist-ssr
@@ -35,3 +32,9 @@ yarn-error.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

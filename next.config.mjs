@@ -1,12 +1,18 @@
-import { createMDX } from "fumadocs-mdx/next";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Build conteneurisable (Coolify / Docker) : serveur Node minimal autonome.
+  // Containerizable build (Coolify / Docker): minimal standalone Node server.
   output: "standalone",
+  // Image optimization: serves AVIF/WebP when the browser supports it.
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  // The OG route reads its brand fonts from src/app/fonts via process.cwd().
+  // The standalone tracer doesn't follow runtime fs reads, so force-include the
+  // font files into the standalone output (otherwise the OG card crashes in prod).
+  outputFileTracingIncludes: {
+    "/api/og/[slug]": ["./src/app/fonts/*.ttf"],
+  },
 };
 
-const withMDX = createMDX();
-
-export default withMDX(nextConfig);
+export default nextConfig;

@@ -1,30 +1,34 @@
-import type { Localized } from "@/lib/loc";
-
-// Modèle de données générique et bilingue. RÈGLE : tout champ descriptif est
-// `Localized` ({ en, fr }, anglais d'abord). Les noms propres (organisations,
-// intervenants, handles) restent des chaînes simples.
+// Site data model (English only). Every text field is a plain
+// English string; non-English-speaking visitors rely on the browser's
+// automatic translation (the document is served as `lang="en"`).
 
 export type OrgColor = "sky" | "violet" | "caramel" | "emerald" | "rose" | "amber";
 
 export type Org = {
   id: string;
   name: string;
-  tag: Localized;
+  tag: string;
   color: OrgColor;
-  description: Localized;
-  /** Chemin d'un logo/icône (ex. "/brand/metamask-fox.svg"). */
+  description: string;
+  /** Path to a logo/icon (e.g. "/brand/metamask/fox.svg"). */
   logo?: string;
+  /** URL of the organization's X/Twitter profile. */
+  x?: string;
 };
 
 export type Speaker = {
   id: string;
   name: string;
-  /** id d'une Org de la même conférence (ou libre si aucune org déclarée). */
+  /** id of an Org from the same conference (or free-form if no org declared). */
   org: string;
-  role: Localized;
+  role: string;
   handle?: string;
-  bio: Localized;
-  highlights: Localized[];
+  /** URL of the X/Twitter profile (verified identity). */
+  x?: string;
+  /** Path to the local avatar (e.g. "/media/speakers/handle.jpg"), committed in /public. */
+  avatar?: string;
+  bio: string;
+  highlights: string[];
   aliases?: string[];
   stage: boolean;
 };
@@ -32,52 +36,61 @@ export type Speaker = {
 export type ThemeBlock = {
   part: number;
   order: number;
-  title: Localized;
+  title: string;
   speakers: string[];
-  summary: Localized;
-  points: Localized[];
+  summary: string;
+  points: string[];
 };
 
 export type MissionComplexity = "beginner" | "intermediate" | "advanced";
 
 export type Mission = {
   id: number;
-  title: Localized;
-  theme: Localized;
+  title: string;
+  theme: string;
   complexity: MissionComplexity;
-  summary: Localized;
-  details: Localized[];
+  summary: string;
+  details: string[];
   recommended?: boolean;
 };
 
-export type GlossaryEntry = { term: string; definition: Localized };
+export type GlossaryEntry = { term: string; definition: string };
 
-export type PartLabel = { part: number; label: Localized; note?: Localized };
+export type PartLabel = { part: number; label: string; note?: string };
 
 export type ConferenceMeta = {
   title: string;
   subtitle?: string;
-  platform: Localized;
-  date: Localized;
-  durationLabel: Localized;
+  platform: string;
+  date: string;
+  durationLabel: string;
   host?: string;
-  oneLiner: Localized;
-  idea?: Localized;
-  note?: Localized;
-  tags: Localized[];
-  sourceNote?: Localized;
+  oneLiner: string;
+  idea?: string;
+  note?: string;
+  tags: string[];
+  sourceNote?: string;
+  /** Link to the event's official announcement (e.g. announcement tweet). */
+  announcementUrl?: string;
+  /** Optional override of the social OG image. Default: card generated on
+   * the fly (/api/og/<slug>). Only set this to force a specific image. */
+  ogImage?: string;
 };
 
 export type Bounties = {
-  total: Localized;
-  range: Localized;
+  total: string;
+  range: string;
   applyUrl?: string;
-  sessionNote?: Localized;
+  sessionNote?: string;
+  /** Link to the event (e.g. Discord event for the follow-up session). */
+  sessionUrl?: string;
 };
 
 export type Conference = {
-  /** Identifiant d'URL, unique. */
+  /** URL identifier, unique. */
   slug: string;
+  /** 16:9 cover image (hub card, banner, social OG image). */
+  cover?: string;
   meta: ConferenceMeta;
   orgs: Org[];
   speakers: Speaker[];

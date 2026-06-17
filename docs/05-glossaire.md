@@ -1,4 +1,4 @@
-# 05 — Glossaire technique
+# 05 · Glossaire technique
 
 ### Delegation Framework (MetaMask)
 Framework de **permissions programmables** de MetaMask, dérivé du projet open-source **Delegatable** (Dan Finlay). Productisé, audité, intégré au wallet, puis entièrement open-sourcé. Permet de déléguer à une dApp ou un agent le droit d'agir au nom de l'utilisateur, de façon strictement bornée.
@@ -31,7 +31,7 @@ Fonctionnalité à venir dans le wallet : la transaction est enveloppée dans un
 Graphe de données massif d'Intuition : **atoms**, **triples**, **markets**, scores de **trust/réputation**. « Un graphe de réputation à propos de tout. » Fournit la couche sémantique « qui/quoi est digne de confiance ».
 
 ### Atom / Triple
-Briques du knowledge graph d'Intuition. Un **atom** = une entité/un item. Un **triple** = une relation structurée (sujet–prédicat–objet) entre atoms. On **stake/dépose** dessus pour exprimer/renforcer la confiance.
+Briques du knowledge graph d'Intuition. Un **atom** = une entité/un item. Un **triple** = une relation structurée (sujet-prédicat-objet) entre atoms. On **stake/dépose** dessus pour exprimer/renforcer la confiance.
 
 ### Ontologie
 La **définition** d'un knowledge graph : quels types de triples et quelle structure utiliser pour organiser des données de façon **sémantique** et signifiante (cf. mission 13).
