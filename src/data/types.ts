@@ -93,6 +93,10 @@ export type Conference = {
   slug: string;
   /** 16:9 cover image (hub card, banner, social OG image). */
   cover?: string;
+  /** Repo-relative path to the raw verbatim transcript (.txt) source file,
+   * co-located with the conference data (not under public/). Served only via
+   * the /c/<slug>/transcript.txt route — no duplicate public URL. */
+  transcriptPath?: string;
   meta: ConferenceMeta;
   orgs: Org[];
   speakers: Speaker[];

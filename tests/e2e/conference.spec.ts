@@ -30,14 +30,15 @@ test.describe("Conference page", () => {
     await expect(page.locator('a[href*="x.com/i/spaces/1RJZzzXydyNJB"]')).toBeVisible();
     await expect(page.locator('a[href*="x.com/i/spaces/1qGvvvqbVjeGB"]')).toBeVisible();
 
-    // The "Copy transcription" button copies the Markdown to the clipboard.
+    // The "Copy transcription" button fetches the raw verbatim transcript and
+    // copies it to the clipboard. The fetch is async, so poll the clipboard.
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     const copy = page.getByRole("button", { name: /copy transcription/i });
     await expect(copy).toBeVisible();
     await copy.click();
-    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
-    expect(clipboard).toContain("# Semantic Delegation");
-    expect(clipboard).toContain("x.com/i/spaces/1RJZzzXydyNJB");
+    await expect
+      .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+      .toMatch(/# Part 1[\s\S]*# Part 2/);
   });
 });
 

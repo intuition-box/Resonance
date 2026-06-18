@@ -14,6 +14,10 @@ const nextConfig = {
     "/api/og/[slug]": ["./src/app/fonts/*.ttf"],
     "/opengraph-image": ["./src/app/fonts/*.ttf"],
     "/twitter-image": ["./src/app/fonts/*.ttf"],
+    // The transcript route reads src/data/conferences/<slug>/transcript.txt via
+    // process.cwd(); the standalone tracer doesn't follow runtime fs reads, so
+    // force-include the source files into the standalone output.
+    "/c/[slug]/transcript.txt": ["./src/data/conferences/*/transcript.txt"],
   },
 };
 

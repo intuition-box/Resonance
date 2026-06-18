@@ -1,6 +1,6 @@
 import type { Conference } from "../../types";
 import { glossary } from "./glossary";
-import { bounties, cover, followAccounts, meta, partLabels, slug } from "./meta";
+import { bounties, cover, followAccounts, meta, partLabels, slug, transcriptPath } from "./meta";
 import { missions } from "./missions";
 import { orgs } from "./orgs";
 import { speakers } from "./speakers";
@@ -13,6 +13,7 @@ import { themes } from "./themes";
 export const semanticDelegation: Conference = {
   slug,
   cover,
+  transcriptPath,
   meta,
   bounties,
   partLabels,

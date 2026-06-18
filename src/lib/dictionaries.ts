@@ -166,6 +166,11 @@ export const dictionary = {
         label: "Glossary",
         desc: "The key technical concepts covered. Optional.",
       },
+      {
+        file: "transcript.txt",
+        label: "Raw transcript",
+        desc: "Optional verbatim transcript. Served at /c/<slug>/transcript.txt and auto-listed in llms.txt for AI agents.",
+      },
     ],
     fieldsTitle: "Required vs optional",
     requiredLabel: "Required",
@@ -176,6 +181,7 @@ export const dictionary = {
       "A cover image",
       "Speaker avatars & X links",
       "Technical glossary",
+      "A raw verbatim transcript",
       "Official announcement link",
     ],
     fieldsNote:
@@ -190,7 +196,7 @@ export const dictionary = {
     promptCopied: "Copied!",
     sourcingTitle: "Assets & content sourcing",
     transcriptionNote:
-      "Transcription and synthesis happen upstream, outside this repo — use any tool you like, then write the result into the data files (English).",
+      "Transcription and synthesis happen upstream, outside this repo — use any tool you like, then write the result into the data files (English). Optionally drop the raw verbatim transcript at src/data/conferences/<slug>/transcript.txt and set transcriptPath in meta.ts: it is served at /c/<slug>/transcript.txt and auto-listed in llms.txt for AI agents.",
     avatarsNote:
       "Speaker avatars are optional and degrade gracefully. Declare the avatar path then run pnpm fetch-avatars to download it from the speaker's X handle (via unavatar) into public/media/speakers/ — don't hotlink X or Discord, those URLs rotate. Use public profile pictures of speakers who appeared publicly; any can be removed on request.",
     validateNote:

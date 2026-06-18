@@ -11,11 +11,14 @@ const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 /**
  * Validates a list of conferences. Returns a list of human-readable error
  * messages (empty = all good). `assetExists`, when provided, checks that
- * referenced public assets (cover, avatars, logos) exist on disk.
+ * referenced public assets (cover, avatars, logos) exist on disk. `fileExists`
+ * checks repo-relative source files (e.g. the transcript, which lives in the
+ * data folder, not under public/).
  */
 export function validateConferences(
   conferences: Conference[],
   assetExists?: (publicPath: string) => boolean,
+  fileExists?: (repoRelativePath: string) => boolean,
 ): string[] {
   const errors: string[] = [];
   const seenSlugs = new Set<string>();
@@ -83,6 +86,10 @@ export function validateConferences(
 
     if (c.cover && assetExists && !assetExists(c.cover)) {
       errors.push(`${where}: cover not found: ${c.cover}`);
+    }
+
+    if (c.transcriptPath && fileExists && !fileExists(c.transcriptPath)) {
+      errors.push(`${where}: transcript not found: ${c.transcriptPath}`);
     }
   }
 

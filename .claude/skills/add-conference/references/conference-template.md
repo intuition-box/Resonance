@@ -51,6 +51,12 @@ export const followAccounts: string[] = ["@0xIntuition", "@alice"]; // optional
 > and add `export const cover = "/media/conferences/example-space/cover.jpg";`
 > (then import `cover` in `index.ts`).
 
+> Raw transcript (optional): drop the verbatim as a plain `.txt` **inside the
+> data folder** (NOT under `public/`): `src/data/conferences/example-space/transcript.txt`,
+> then add `export const transcriptPath = "src/data/conferences/example-space/transcript.txt";`
+> (and import `transcriptPath` in `index.ts`). It is served at the single
+> canonical URL `/c/example-space/transcript.txt` and auto-listed in `/llms.txt`.
+
 ## `orgs.ts`
 ```ts
 import type { Org } from "../../types";
@@ -178,6 +184,7 @@ export const exampleSpace: Conference = {
   glossary,
   followAccounts,
   // cover: "/media/conferences/example-space/cover.jpg", // optional (see meta.ts)
+  // transcriptPath: "src/data/conferences/example-space/transcript.txt", // optional (see meta.ts)
 };
 ```
 
@@ -205,6 +212,7 @@ const real: Conference[] = [semanticDelegation, exampleSpace];
 | `theme.part` / `theme.order` | `number` | order the timeline |
 | `mission.complexity` | enum | `beginner` \| `intermediate` \| `advanced` |
 | `avatar` / `cover` / `logo` | `string` | absolute path under `/media/…` or `/brand/…` |
+| `transcriptPath` | `string` | optional; repo-relative `.txt` in the data folder, **not** under `public/` |
 
 ## Common pitfalls
 - **Non-parseable `meta.date`** → the conference sinks to the bottom of the sort. Always `"Month D, YYYY"`.
@@ -212,4 +220,5 @@ const real: Conference[] = [semanticDelegation, exampleSpace];
 - **Non-English text** → every text field is plain English (no i18n object).
 - **Forgetting registration** in `src/data/conferences/index.ts` → the conference won't appear.
 - **Referenced asset missing** from `public/` → broken image (a missing avatar also breaks the OG card).
+- **Transcript placed under `public/`** → duplicate public URL. Keep it in the data folder (`src/data/conferences/<slug>/transcript.txt`); the `/c/<slug>/transcript.txt` route is the only public URL.
 - **Folder slug ≠ exported `slug`** → inconsistent routes.
