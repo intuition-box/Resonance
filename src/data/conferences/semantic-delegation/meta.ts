@@ -2,6 +2,7 @@ import type { Bounties, ConferenceMeta, PartLabel } from "../../types";
 
 export const slug = "semantic-delegation";
 export const cover = "/media/conferences/semantic-delegation/cover.jpg";
+export const transcriptPath = "src/data/conferences/semantic-delegation/transcript.txt";
 
 export const meta: ConferenceMeta = {
   title: "Semantic Delegation",

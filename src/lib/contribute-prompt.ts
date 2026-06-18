@@ -7,13 +7,13 @@ GOAL
 From a source recording/transcript, create one new conference and wire it into the site.
 
 1) DATA — create a folder \`src/data/conferences/<slug>/\` (kebab-case slug), one file per responsibility:
-- meta.ts     → exports \`slug\`, optional \`cover\`, \`meta: ConferenceMeta\`, and optionally \`bounties\`, \`partLabels\`, \`followAccounts\`
+- meta.ts     → exports \`slug\`, optional \`cover\`, optional \`transcriptPath\`, \`meta: ConferenceMeta\`, and optionally \`bounties\`, \`partLabels\`, \`followAccounts\`
 - orgs.ts     → \`orgs: Org[]\` (the teams involved)
 - speakers.ts → \`speakers: Speaker[]\`
 - themes.ts   → \`themes: ThemeBlock[]\` (the event, block by block, in real chronological order)
 - missions.ts → \`missions: Mission[]\` (optional — bounties launched after the event)
 - glossary.ts → \`glossary: GlossaryEntry[]\` (optional — key technical terms)
-- index.ts    → assembles \`export const <camelCaseSlug>: Conference = { slug, cover, meta, bounties, partLabels, orgs, speakers, themes, missions, glossary, followAccounts }\`
+- index.ts    → assembles \`export const <camelCaseSlug>: Conference = { slug, cover, transcriptPath, meta, bounties, partLabels, orgs, speakers, themes, missions, glossary, followAccounts }\`
 
 All types live in \`src/data/types.ts\`. Key shapes:
 - ConferenceMeta: title, subtitle?, platform, date, durationLabel, host?, oneLiner, idea?, note?, tags[], sourceNote?, announcementUrl?, sessions? ({ label, url }[] — replayable audio Space links; use several when one event spanned multiple Spaces), ogImage?
@@ -30,6 +30,8 @@ All types live in \`src/data/types.ts\`. Key shapes:
 - Optional cover: \`public/media/conferences/<slug>/cover.jpg\` → \`/media/conferences/<slug>/cover.jpg\`
 - Org logos: \`public/brand/<org>/...\`
 You do NOT design a social image: a branded Open Graph card is auto-generated at \`/api/og/<slug>\` from your data. Set \`cover\` ONLY to override the visual in the UI.
+
+3b) RAW TRANSCRIPT (optional) — to expose the full verbatim to AI agents, save it as a plain \`.txt\` INSIDE the data folder (NOT under \`public/\`): \`src/data/conferences/<slug>/transcript.txt\`, then export \`transcriptPath = "src/data/conferences/<slug>/transcript.txt"\` from meta.ts and wire it into index.ts. It is served at the single canonical URL \`/c/<slug>/transcript.txt\` and auto-listed in \`/llms.txt\` (no edit needed there). Do NOT place it under \`public/\` — that would create a duplicate public URL.
 
 CONVENTIONS (must respect)
 - English only: every text field is a plain English string (no i18n / translation objects). Browsers handle translation.

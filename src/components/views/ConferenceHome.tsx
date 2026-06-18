@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useConference } from "../conference-provider";
 import { OrgTag } from "../shared";
 
@@ -188,20 +188,37 @@ const CTA_CLASS =
   "inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white";
 
 /** Action row under the banner: one link per audio Space session + a button
- * that copies the full conference transcript (Markdown) to the clipboard. */
+ * that copies the raw verbatim transcript to the clipboard (fetched on demand
+ * from the static asset; falls back to the synthesized Markdown if absent). */
 function ConferenceActions() {
   const conference = useConference();
   const { meta } = conference;
   const sessions = meta.sessions ?? [];
   const [copied, setCopied] = useState(false);
 
+  // Load the raw transcript lazily, on intent (hover/focus) or at click time,
+  // and memoize the in-flight promise so it's fetched at most once. Priming it
+  // before the click keeps the transcript ready when the handler reaches
+  // navigator.clipboard.writeText, which needs a fresh user activation. We hit
+  // the canonical /c/<slug>/transcript.txt route (same URL agents and llms.txt
+  // use, and it carries a real Cache-Control), not the raw public asset.
+  const transcriptPromise = useRef<Promise<string> | null>(null);
+  const loadTranscript = () => {
+    if (!transcriptPromise.current) {
+      transcriptPromise.current = conference.transcriptPath
+        ? fetch(`/c/${conference.slug}/transcript.txt`).then((r) => r.text())
+        : Promise.resolve(conferenceToMarkdown(conference));
+    }
+    return transcriptPromise.current;
+  };
+
   const copyTranscript = async () => {
     try {
-      await navigator.clipboard.writeText(conferenceToMarkdown(conference));
+      await navigator.clipboard.writeText(await loadTranscript());
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      // clipboard unavailable (non-secure context): silently ignore
+      // clipboard unavailable (non-secure context) or fetch failed: silently ignore
     }
   };
 
@@ -221,7 +238,13 @@ function ConferenceActions() {
           <ExternalLink className="size-3 opacity-50" />
         </a>
       ))}
-      <button type="button" onClick={copyTranscript} className={CTA_CLASS}>
+      <button
+        type="button"
+        onClick={copyTranscript}
+        onMouseEnter={loadTranscript}
+        onFocus={loadTranscript}
+        className={CTA_CLASS}
+      >
         {copied ? (
           <Check className="size-3.5 text-emerald-400" />
         ) : (

@@ -7,8 +7,11 @@ import { validateConferences } from "../src/data/conferences/validate";
 const assetExists = (publicPath: string) =>
   existsSync(join(process.cwd(), "public", publicPath.replace(/^\//, "")));
 
+// Resolves a repo-relative path (e.g. "src/data/conferences/<slug>/transcript.txt").
+const fileExists = (repoRelativePath: string) => existsSync(join(process.cwd(), repoRelativePath));
+
 const conferences = getConferences();
-const errors = validateConferences(conferences, assetExists);
+const errors = validateConferences(conferences, assetExists, fileExists);
 
 if (errors.length > 0) {
   console.error(`\n✖ Conference data validation failed (${errors.length} issue(s)):\n`);
